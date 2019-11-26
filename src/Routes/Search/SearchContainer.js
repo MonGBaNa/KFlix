@@ -7,16 +7,24 @@ export default class extends Component {
     state = { 
         movieResults:null,
         tvResults:null,
-        searchTerm:"code",
+        searchTerm:"",
         error:null,
         loading:false
     };
 
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
         const {searchTerm} = this.state;
         if(searchTerm !== "" ) {
             this.searchByTerm(searchTerm);
         }
+    }
+
+    updateTerm = (event) => {
+        const {target:{value}} = event;
+        this.setState({
+            searchTerm: value
+        })
     }
 
     searchByTerm = async () => {
@@ -37,7 +45,7 @@ export default class extends Component {
     }
 
     render() {
-        const { movieResults, tvResults, searchTerm, error, loading } = this.state;
+        const { movieResults, tvResults, searchTerm, error, loading, updateTerm } = this.state;
         console.log(this.state);
         return (
             <SearchPresenter
@@ -47,6 +55,7 @@ export default class extends Component {
                 error={error}
                 loading={loading}
                 handleSubmit={this.handleSubmit}
+                updateTerm={this.updateTerm}
             />
         );
     }

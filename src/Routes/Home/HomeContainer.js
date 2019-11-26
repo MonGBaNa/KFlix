@@ -8,7 +8,7 @@ export default class extends Component {
        upcoming:null,
        popular:null,
        error:null,
-       loading:false
+       loading:true
     };
 
     async componentDidMount(){
